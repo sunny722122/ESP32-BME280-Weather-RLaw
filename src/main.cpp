@@ -1,4 +1,9 @@
 // This is the master version of this project
+<<<<<<< HEAD
+=======
+// This is another test of gits pull
+// this is robbins change
+>>>>>>> 68bdcb933f3d7bf8d3e3b748f0c79047a29b1d52
 #include <Arduino.h>
 #include "sensor_readings.h"
 #include "TFT_eSPI.h"     // ESP32 Hardware-specific library
