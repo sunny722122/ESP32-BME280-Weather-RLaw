@@ -40,19 +40,11 @@ void setup() {
 
 void loop() {
   tft.setCursor(50, 50);
-<<<<<<< HEAD
   
   tft.println(millis());
   // passing the bme object by value
   // refresh_readings(bme);
   // Passing the bme object by reference (a pointer: & means pass the address stored in the tft variable).
-=======
-  tft.println(millis());
-  // passing the bme object by value
-  // refresh_readings(bme);
-  // Passing the bme and tft objects by reference
-  //(a pointer: & means pass the address stored in the bme and tft variables).
->>>>>>> refs/remotes/origin/b3_tft_setup
   refresh_readings(&bme, &tft);  
   delay(2000);
 }
