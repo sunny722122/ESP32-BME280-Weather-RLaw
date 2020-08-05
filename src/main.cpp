@@ -3,6 +3,8 @@
 #include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
 
+#define LED_ONBOARD_PIN 2
+
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
@@ -10,6 +12,21 @@ TFT_eSPI tft = TFT_eSPI();
 
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
+
+// LED
+struct Led
+{
+    uint8_t pin;
+    bool on;
+
+    void update()
+    {
+        digitalWrite(pin, on ? HIGH : LOW);
+    }
+};
+
+// Global Variables
+Led onboard_led = {LED_ONBOARD_PIN, false};
 
 void initSPIFFS()
 {
@@ -61,6 +78,8 @@ void loop() {
 
   // for those students who are using the MPU-6050, this call to "refresh_readings" will be slightly different.
   refresh_readings_bme280(&bme, &tft);
-  //refresh_readings_mpu6050(&tft);  
+  //refresh_readings_mpu6050(&tft);
+  onboard_led.on = millis() % 2000 < 1000;
+  onboard_led.update();  
   delay(2000);
 }
