@@ -44,6 +44,6 @@ void loop() {
 
   // for those students who are using the MPU-6050, this call to "refresh_readings" will be slightly different.
   refresh_readings_bme280(&bme, &tft);
-  //refresh_readings_mpu6050(&bme, &tft);  
+  //refresh_readings_mpu6050(&tft);  
   delay(2000);
 }
