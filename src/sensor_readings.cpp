@@ -21,6 +21,7 @@ void refresh_readings_bme280(Adafruit_BME280* bme, TFT_eSPI* tft) {
   // the -> symbol means to de-reference the pointer.
   tft->setCursor(5, 5);
   tft->setTextColor(fg, bg);
+  tft->loadFont("SansSerif-36");
   tft->println("Right now...");
 
   f_temperature = bme->readTemperature();
@@ -30,8 +31,6 @@ void refresh_readings_bme280(Adafruit_BME280* bme, TFT_eSPI* tft) {
 
   tft->setTextColor(TFT_YELLOW, bg);
 
-  tft->loadFont("SansSerif-36");
-  
   // Temperature
   Serial.print(f_temperature);
   Serial.println(" °C");

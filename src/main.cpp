@@ -32,7 +32,8 @@ void setup() {
   // Setup the TFT
   tft.begin();
   tft.setRotation(3);
-  tft.loadFont("SansSerif-36");
+  //tft.loadFont("SansSerif-36");
+  tft.loadFont("NotoSansBold15");
   tft.setTextColor(fg, bg);
   tft.fillScreen(bg);
   tft.setCursor(0, 0);
@@ -46,13 +47,13 @@ void setup() {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);  // Infinite loop
   }
-  tft.loadFont("NotoSansBold15");
   tft.fillScreen(bg);
 }
 
 void loop() {
   tft.setCursor(50, 50);
   tft.println(millis());
+  delay(2000);
   // passing the bme object by value
   // refresh_readings(bme);
   // Passing the bme and tft objects by reference
