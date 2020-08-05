@@ -11,9 +11,23 @@ TFT_eSPI tft = TFT_eSPI();
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
 
+void initSPIFFS()
+{
+    if (!SPIFFS.begin())
+    {
+        Serial.println("Cannot mount SPIFFS volume...");
+        while (1){}
+    }
+    else
+    {
+        Serial.println("SPIFFS volume mounted properly");
+    }
+}
+
 void setup() {
   pinMode(LED_BUILTIN,OUTPUT);
   Serial.begin(9600);
+  initSPIFFS();
   bool status;
   // Setup the TFT
   tft.begin();
