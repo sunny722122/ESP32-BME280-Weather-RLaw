@@ -51,9 +51,9 @@ void setup() {
 }
 
 void loop() {
-  tft.setCursor(50, 50);
-  tft.println(millis());
-  delay(2000);
+  //tft.setCursor(50, 50);
+  //tft.println(millis());
+  //delay(2000);
   // passing the bme object by value
   // refresh_readings(bme);
   // Passing the bme and tft objects by reference
