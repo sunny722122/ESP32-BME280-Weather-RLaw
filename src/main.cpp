@@ -79,7 +79,7 @@ void loop() {
   // for those students who are using the MPU-6050, this call to "refresh_readings" will be slightly different.
   refresh_readings_bme280(&bme, &tft);
   //refresh_readings_mpu6050(&tft);
-  onboard_led.on = millis() % 2000 < 1000;
-  onboard_led.update();  
+  //onboard_led.on = millis() % 2000 < 1000;
+  //onboard_led.update();  
   delay(2000);
 }
