@@ -18,6 +18,7 @@ void setup() {
   // Setup the TFT
   tft.begin();
   tft.setRotation(3);
+  tft.loadFont("SansSerif-36");
   tft.setTextColor(fg, bg);
   tft.fillScreen(bg);
   tft.setCursor(0, 0);
@@ -31,6 +32,7 @@ void setup() {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);  // Infinite loop
   }
+  tft.loadFont("NotoSansBold15");
   tft.fillScreen(bg);
 }
 

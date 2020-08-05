@@ -29,6 +29,8 @@ void refresh_readings_bme280(Adafruit_BME280* bme, TFT_eSPI* tft) {
   f_altitude    = bme->readAltitude(SEALEVELPRESSURE_HPA);
 
   tft->setTextColor(TFT_YELLOW, bg);
+
+  tft->loadFont("SansSerif-36");
   
   // Temperature
   Serial.print(f_temperature);
