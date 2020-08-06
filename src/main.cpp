@@ -68,18 +68,14 @@ void setup() {
 }
 
 void loop() {
-  //tft.setCursor(50, 50);
-  //tft.println(millis());
-  //delay(2000);
-  // passing the bme object by value
-  // refresh_readings(bme);
+  // Passing the bme object by value
+  // refresh_readings_bme280(bme);
   // Passing the bme and tft objects by reference
-  //(a pointer: & means pass the address stored in the bme and tft variables).
-
-  // for those students who are using the MPU-6050, this call to "refresh_readings" will be slightly different.
+  // (a pointer: & means pass the address stored in the bme and tft variables).
   refresh_readings_bme280(&bme, &tft);
+
+  // For those students who are using the MPU-6050, 
+  // this call to "refresh_readings" will be slightly different.
   //refresh_readings_mpu6050(&tft);
-  //onboard_led.on = millis() % 2000 < 1000;
-  //onboard_led.update();  
   delay(2000);
 }
