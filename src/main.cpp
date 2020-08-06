@@ -3,8 +3,6 @@
 #include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
 
-#define LED_ONBOARD_PIN 2
-
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
