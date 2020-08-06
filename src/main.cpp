@@ -50,7 +50,7 @@ void setup() {
   tft.begin();
   tft.setRotation(3);
   //tft.loadFont("SansSerif-36");
-  tft.loadFont("NotoSansBold15");
+  tft.loadFont("NotoSansBold20");
   tft.setTextColor(fg, bg);
   tft.fillScreen(bg);
   tft.setCursor(0, 0);
