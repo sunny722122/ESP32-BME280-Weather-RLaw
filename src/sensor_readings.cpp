@@ -2,8 +2,16 @@
 #include "sensor_readings.h"
 //#include "settings.h"
 
+<<<<<<< HEAD
 // Passing the tft object by reference
 void refresh_readings(Adafruit_BME280* bme, TFT_eSPI* tft) {
+=======
+// Passing the bme and tft objects by reference
+// the * means that the parameter called bme will contain an address to the object of type Adafruit_BME280
+// For those students using the MCU-6050 this code inside "refresh_readings" 
+// will be completely different than for the Adafruit_BME280.
+void refresh_readings_bme280(Adafruit_BME280* bme, TFT_eSPI* tft) {
+>>>>>>> 44929b20e8e202d7a71c6dc1dcf8da8eabfc8549
   float f_temperature;
   float f_humidity;
   float f_pressure;
@@ -20,6 +28,7 @@ void refresh_readings(Adafruit_BME280* bme, TFT_eSPI* tft) {
 
   tft->setCursor(5, 5);
   tft->setTextColor(fg, bg);
+  tft->loadFont("SansSerif-36");
   tft->println("Right now...");
 
 
@@ -29,7 +38,7 @@ void refresh_readings(Adafruit_BME280* bme, TFT_eSPI* tft) {
   f_altitude    = bme->readAltitude(SEALEVELPRESSURE_HPA);
 
   tft->setTextColor(TFT_YELLOW, bg);
-  
+
   // Temperature
   Serial.print(f_temperature);
   Serial.println(" °C");
@@ -64,4 +73,8 @@ void refresh_readings(Adafruit_BME280* bme, TFT_eSPI* tft) {
   
   //digitalWrite(LED_BUILTIN, LOW);
   Serial.println("-----v3----");   
+}
+
+void refresh_readings_mpu6050(TFT_eSPI* tft){
+
 }

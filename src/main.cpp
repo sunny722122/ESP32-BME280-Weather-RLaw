@@ -4,6 +4,8 @@
 #include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
 
+#define LED_ONBOARD_PIN 2
+
 // bme is global to this file only
 Adafruit_BME280 bme;
 TFT_eSPI tft = TFT_eSPI();
@@ -11,15 +13,46 @@ TFT_eSPI tft = TFT_eSPI();
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
 
+// LED
+struct Led
+{
+    uint8_t pin;
+    bool on;
+
+    void update()
+    {
+        digitalWrite(pin, on ? HIGH : LOW);
+    }
+};
+
+// Global Variables
+Led onboard_led = {LED_ONBOARD_PIN, false};
+
+void initSPIFFS()
+{
+    if (!SPIFFS.begin())
+    {
+        Serial.println("Cannot mount SPIFFS volume...");
+        while (1){}
+    }
+    else
+    {
+        Serial.println("SPIFFS volume mounted properly");
+    }
+}
+
 void setup() {
   pinMode(LED_BUILTIN,OUTPUT);
   Serial.begin(9600);
+  initSPIFFS();
   bool status;
   // Setup the TFT
   
   tft.begin();
 
   tft.setRotation(3);
+  //tft.loadFont("SansSerif-36");
+  tft.loadFont("NotoSansBold15");
   tft.setTextColor(fg, bg);
   
   tft.fillScreen(bg);
@@ -39,12 +72,14 @@ void setup() {
 }
 
 void loop() {
-  tft.setCursor(50, 50);
-  
-  tft.println(millis());
-  // passing the bme object by value
-  // refresh_readings(bme);
-  // Passing the bme object by reference (a pointer: & means pass the address stored in the tft variable).
-  refresh_readings(&bme, &tft);  
+  // Passing the bme object by value
+  // refresh_readings_bme280(bme);
+  // Passing the bme and tft objects by reference
+  // (a pointer: & means pass the address stored in the bme and tft variables).
+  refresh_readings_bme280(&bme, &tft);
+
+  // For those students who are using the MPU-6050, 
+  // this call to "refresh_readings" will be slightly different.
+  //refresh_readings_mpu6050(&tft);
   delay(2000);
 }
