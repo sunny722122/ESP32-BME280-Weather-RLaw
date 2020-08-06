@@ -13,21 +13,6 @@ TFT_eSPI tft = TFT_eSPI();
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
 
-// LED
-struct Led
-{
-    uint8_t pin;
-    bool on;
-
-    void update()
-    {
-        digitalWrite(pin, on ? HIGH : LOW);
-    }
-};
-
-// Global Variables
-Led onboard_led = {LED_ONBOARD_PIN, false};
-
 void initSPIFFS()
 {
     if (!SPIFFS.begin())
@@ -49,7 +34,6 @@ void setup() {
   // Setup the TFT
   tft.begin();
   tft.setRotation(3);
-  //tft.loadFont("SansSerif-36");
   tft.loadFont("NotoSansBold20");
   tft.setTextColor(fg, bg);
   tft.fillScreen(bg);
