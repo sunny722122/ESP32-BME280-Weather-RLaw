@@ -56,13 +56,16 @@ void setup() {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);  // Infinite loop
   }
+  // Connect to Wifi
+  io.connect();
+
+  // Check the Wifi status
+  // wifiStatus();
 
   // Start the task scheduler
   runner.init();
-
   // Add the task to the scheduler
   runner.addTask(t1_bme280);
-
   // Enable the task
   t1_bme280.enable();
 
