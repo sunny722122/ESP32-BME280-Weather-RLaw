@@ -5,6 +5,7 @@
 #include "sensor_readings.h"
 #include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
+#include "bmp_functions.h"
 
 // bme is global to this file only
 Adafruit_BME280 bme;
@@ -49,6 +50,7 @@ void setup() {
     while (1);  // Infinite loop
   }
   tft.fillScreen(bg);
+  drawBmp("/te.bmp", 160, 198, &tft);
 }
 
 void loop() {
