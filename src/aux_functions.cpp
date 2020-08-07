@@ -3,8 +3,8 @@
 
 void indicators()
 {
-  digitalWrite(LED_PIN, HIGH);
-  digitalWrite(LED_PIN, LOW);
+  //digitalWrite(LED_PIN, HIGH);
+  //digitalWrite(LED_PIN, LOW);
 }
 
 // void wifiStatus()

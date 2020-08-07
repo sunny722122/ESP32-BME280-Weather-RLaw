@@ -4,6 +4,7 @@
 #include "settings.h"    // The order is important!
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
+#include "network_config.h"
 
 void sensor_readings_update();
 
