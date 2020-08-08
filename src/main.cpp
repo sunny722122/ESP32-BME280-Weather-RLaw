@@ -58,7 +58,7 @@ void setup() {
     while (1);  // Infinite loop
   }
   // Connect to Wifi
-  io.connect();
+  //io.connect();
 
   // Check the Wifi status
   // wifiStatus();
