@@ -5,7 +5,6 @@
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
 #include "network_config.h"
-#include "clock.h"
 
 void sensor_readings_update();
 void clock_update();
