@@ -4,7 +4,8 @@ void refresh_clock(TFT_eSPI* tft, Timezone* timezone)
 {
   //See documentation for ezTime options: https://github.com/ropg/ezTime
   tft->loadFont("NotoSansBold20");
-  tft->setTextColor(TFT_LIGHTGREY, TFT_BLACK);  // See available colors at https://github.com/Bodmer/TFT_eSPI/blob/master/TFT_eSPI.h
+  // See available colors at https://github.com/Bodmer/TFT_eSPI/blob/master/TFT_eSPI.h
+  tft->setTextColor(TFT_LIGHTGREY, TFT_BLACK);  
   //Clear the date area
   tft->fillRect(220, 50, 135, 70, TFT_BLACK);
   // Day of week, day of month
