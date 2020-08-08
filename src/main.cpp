@@ -5,8 +5,10 @@
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
 #include "network_config.h"
+#include "clock.h"
 
 void sensor_readings_update();
+void clock_update();
 
 // bme is global to this file only
 Adafruit_BME280 bme;
@@ -18,10 +20,14 @@ uint16_t fg = TFT_WHITE;
 
 // Setup tasks for the task scheduler
 // The third argument taks a pointer to a function, but cannot have parameters.
-Task t1_bme280(2000, TASK_FOREVER, &sensor_readings_update); 
+Task t1_bme280(2000, TASK_FOREVER, &sensor_readings_update);
+Task t2_clock(1000, TASK_FOREVER, &clock_update);
 
 // Create the scheduler
 Scheduler runner;
+
+// Setup the clock 
+Timezone sydneyTZ;
 
 void initSPIFFS()
 {
@@ -63,12 +69,20 @@ void setup() {
   // Check the Wifi status
   // wifiStatus();
 
+  // Setup the clock
+  waitForSync();
+
+  sydneyTZ.setLocation("Australia/Sydney");
+
   // Start the task scheduler
   runner.init();
   // Add the task to the scheduler
   runner.addTask(t1_bme280);
+  runner.addTask(t2_clock);
+
   // Enable the task
   t1_bme280.enable();
+  t2_clock.enable();
 
   tft.fillScreen(bg);
   drawBmp("/te.bmp", 160, 198, &tft);
@@ -77,9 +91,16 @@ void setup() {
 void loop() {
   // Execute the scheduler runner
   runner.execute();
+  // Update the clock
+  events();
 }
 
 void sensor_readings_update()
 {
   refresh_readings_bme280(&bme, &tft);
+}
+
+void clock_update()
+{
+  refresh_clock(&tft, &sydneyTZ);
 }
