@@ -64,7 +64,7 @@ void setup() {
     while (1);  // Infinite loop
   }
   // Connect to Wifi
-  //io.connect();
+  io.connect();
 
   // Check the Wifi status
   // wifiStatus();
@@ -79,7 +79,6 @@ void setup() {
   // Add the task to the scheduler
   runner.addTask(t1_bme280);
   runner.addTask(t2_clock);
-
   // Enable the task
   t1_bme280.enable();
   t2_clock.enable();
