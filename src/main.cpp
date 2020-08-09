@@ -94,7 +94,8 @@ void setup() {
   // Setup the clock
   waitForSync();
 
-  sydneyTZ.setLocation("Australia/Sydney");
+  //sydneyTZ.setLocation("Australia/Sydney");
+  sydneyTZ.setLocation("America/Edmonton");
 
   // Start the task scheduler
   runner.init();
