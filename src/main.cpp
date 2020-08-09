@@ -66,6 +66,7 @@ void initWiFi()
 void setup() {
   Serial.begin(9600);
   initSPIFFS();
+  initWiFi();
   bool status;
   // Setup the TFT
   tft.begin();
