@@ -1,14 +1,21 @@
 #include <Arduino.h>
 #include "sensor_readings.h"
+#include "SPIFFS.h"
 //#include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
+#include "WiFi.h"
+//#include <ESPAsyncWebServer.h>
 //#include "network_config.h"
 
 void sensor_readings_update();
 //void clock_update();
 
+
+// WiFi credentials
+char WIFI_SSID[20] = "OldRob";
+char WIFI_PASS[20] = "5223qaz7542PLM";
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
@@ -40,6 +47,20 @@ void initSPIFFS()
     {
         Serial.println("SPIFFS volume mounted properly");
     }
+}
+
+// Wifi Setup
+void initWiFi()
+{
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(WIFI_SSID, WIFI_PASS);
+    Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print(".");
+        delay(500);
+    }
+    Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
 }
 
 void setup() {
