@@ -7,21 +7,21 @@
 #include "TaskScheduler.h"
 #include "WiFi.h"
 //#include <ESPAsyncWebServer.h>
-//#include "network_config.h"
+#include "network_config.h"
 
 void sensor_readings_update();
-//void clock_update();
+void clock_update();
 
 
 // WiFi credentials
-char WIFI_SSID[20] = "OldRob";
-char WIFI_PASS[20] = "5223qaz7542PLM";
+char WIFI_SSID_STRING[20] = "OldRob";
+char WIFI_PASS_STRING[20] = "5223qaz7542PLM";
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
 TFT_eSPI tft = TFT_eSPI();
 // Setup the clock 
-//Timezone sydneyTZ;
+Timezone sydneyTZ;
 
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
@@ -29,7 +29,7 @@ uint16_t fg = TFT_WHITE;
 // Setup tasks for the task scheduler
 // The third argument taks a pointer to a function, but cannot have parameters.
 Task t1_bme280(2000, TASK_FOREVER, &sensor_readings_update);
-//Task t2_clock(1000, TASK_FOREVER, &clock_update);
+Task t2_clock(1000, TASK_FOREVER, &clock_update);
 
 // Create the scheduler
 Scheduler runner;
@@ -53,7 +53,7 @@ void initSPIFFS()
 void initWiFi()
 {
     WiFi.mode(WIFI_STA);
-    WiFi.begin(WIFI_SSID, WIFI_PASS);
+    WiFi.begin(WIFI_SSID_STRING, WIFI_PASS_STRING);
     Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
     while (WiFi.status() != WL_CONNECTED)
     {
@@ -66,7 +66,7 @@ void initWiFi()
 void setup() {
   Serial.begin(9600);
   initSPIFFS();
-  initWiFi();
+  //initWiFi();
   bool status;
   // Setup the TFT
   tft.begin();
@@ -86,24 +86,24 @@ void setup() {
     while (1);  // Infinite loop
   }
   // Connect to Wifi
-  //io.connect();
+  io.connect();
 
   // Check the Wifi status
   // wifiStatus();
 
   // Setup the clock
-  //waitForSync();
+  waitForSync();
 
-  //sydneyTZ.setLocation("Australia/Sydney");
+  sydneyTZ.setLocation("Australia/Sydney");
 
   // Start the task scheduler
   runner.init();
   // Add the task to the scheduler
   runner.addTask(t1_bme280);
-  //runner.addTask(t2_clock);
+  runner.addTask(t2_clock);
   // Enable the task
   t1_bme280.enable();
-  //t2_clock.enable();
+  t2_clock.enable();
 
   tft.fillScreen(bg);
   drawBmp("/te.bmp", 160, 198, &tft);
@@ -121,7 +121,7 @@ void sensor_readings_update()
   refresh_readings_bme280(&bme, &tft);
 }
 
-//void clock_update()
-//{
-  //refresh_clock(&tft, &sydneyTZ);
-//}
+void clock_update()
+{
+  refresh_clock(&tft, &sydneyTZ);
+}
