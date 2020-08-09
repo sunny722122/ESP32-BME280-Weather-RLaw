@@ -4,17 +4,17 @@
 #include "settings.h"    // The order is important!
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
-#include "network_config.h"
+//#include "network_config.h"
 
 void sensor_readings_update();
-void clock_update();
+//void clock_update();
 
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
 TFT_eSPI tft = TFT_eSPI();
 // Setup the clock 
-Timezone sydneyTZ;
+//Timezone sydneyTZ;
 
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
@@ -22,7 +22,7 @@ uint16_t fg = TFT_WHITE;
 // Setup tasks for the task scheduler
 // The third argument taks a pointer to a function, but cannot have parameters.
 Task t1_bme280(2000, TASK_FOREVER, &sensor_readings_update);
-Task t2_clock(1000, TASK_FOREVER, &clock_update);
+//Task t2_clock(1000, TASK_FOREVER, &clock_update);
 
 // Create the scheduler
 Scheduler runner;
@@ -99,7 +99,7 @@ void sensor_readings_update()
   refresh_readings_bme280(&bme, &tft);
 }
 
-void clock_update()
-{
+//void clock_update()
+//{
   //refresh_clock(&tft, &sydneyTZ);
-}
+//}
