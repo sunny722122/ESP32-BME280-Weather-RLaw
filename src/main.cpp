@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "sensor_readings.h"
-#include "TFT_eSPI.h"     // ESP32 Hardware-specific library
+//#include "TFT_eSPI.h"     // ESP32 Hardware-specific library
 #include "settings.h"    // The order is important!
 #include "bmp_functions.h"
 #include "TaskScheduler.h"
