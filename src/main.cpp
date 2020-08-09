@@ -21,7 +21,7 @@ Adafruit_BME280 bme;
 // tft is global to this file only
 TFT_eSPI tft = TFT_eSPI();
 // Setup the clock 
-Timezone sydneyTZ;
+Timezone edmontonTZ;
 
 uint16_t bg = TFT_BLACK;
 uint16_t fg = TFT_WHITE;
@@ -95,7 +95,7 @@ void setup() {
   waitForSync();
 
   //sydneyTZ.setLocation("Australia/Sydney");
-  sydneyTZ.setLocation("America/Edmonton");
+  edmontonTZ.setLocation("America/Edmonton");
 
   // Start the task scheduler
   runner.init();
@@ -124,5 +124,5 @@ void sensor_readings_update()
 
 void clock_update()
 {
-  refresh_clock(&tft, &sydneyTZ);
+  refresh_clock(&tft, &edmontonTZ);
 }
