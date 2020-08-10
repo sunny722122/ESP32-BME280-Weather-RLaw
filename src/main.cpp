@@ -12,10 +12,6 @@
 void sensor_readings_update();
 void clock_update();
 
-
-// WiFi credentials
-char WIFI_SSID_STRING[20] = "OldRob";
-char WIFI_PASS_STRING[20] = "5223qaz7542PLM";
 // bme is global to this file only
 Adafruit_BME280 bme;
 // tft is global to this file only
@@ -34,8 +30,6 @@ Task t2_clock(1000, TASK_FOREVER, &clock_update);
 // Create the scheduler
 Scheduler runner;
 
-
-
 void initSPIFFS()
 {
     if (!SPIFFS.begin())
@@ -50,23 +44,10 @@ void initSPIFFS()
 }
 
 // Wifi Setup
-void initWiFi()
-{
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(WIFI_SSID_STRING, WIFI_PASS_STRING);
-    Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        Serial.print(".");
-        delay(500);
-    }
-    Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
-}
 
 void setup() {
   Serial.begin(9600);
   initSPIFFS();
-  //initWiFi();
   bool status;
   // Setup the TFT
   tft.begin();
@@ -94,7 +75,6 @@ void setup() {
   // Setup the clock
   waitForSync();
 
-  //sydneyTZ.setLocation("Australia/Sydney");
   edmontonTZ.setLocation("America/Edmonton");
 
   // Start the task scheduler
