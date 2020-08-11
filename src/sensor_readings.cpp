@@ -1,12 +1,17 @@
 #include <Arduino.h>
 #include "sensor_readings.h"
-//#include "settings.h"
+#include "settings.h"
 
 // Passing the bme and tft objects by reference
 // the * means that the parameter called bme will contain an address to the object of type Adafruit_BME280
 // For those students using the MCU-6050 this code inside "refresh_readings" 
 // will be completely different than for the Adafruit_BME280.
-void refresh_readings_bme280(Adafruit_BME280* bme, TFT_eSPI* tft) {
+void refresh_readings_bme280(  Adafruit_BME280* bme, 
+                            TFT_eSPI* tft,
+                            AdafruitIO_Feed* temp,
+                            AdafruitIO_Feed* hum,
+                            AdafruitIO_Feed* bar,
+                            AdafruitIO_Feed* alt) {
   float f_temperature;
   float f_humidity;
   float f_pressure;
