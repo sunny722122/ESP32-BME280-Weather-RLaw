@@ -12,8 +12,6 @@
                             AdafruitIO_Feed* hum,
                             AdafruitIO_Feed* bar,
                             AdafruitIO_Feed* alt);
-                            
-    void refresh_readings_mpu6050(TFT_eSPI* tft);
 
 #endif
 

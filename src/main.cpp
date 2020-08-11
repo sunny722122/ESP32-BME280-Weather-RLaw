@@ -75,7 +75,11 @@ void setup() {
   }
   // Connect to Wifi
   io.connect();
-
+  // wait for a connection
+  while(io.status() < AIO_CONNECTED) {
+      Serial.print(".");
+  delay(500);
+    }
   // Check the Wifi status
   // wifiStatus();
 
@@ -100,6 +104,8 @@ void setup() {
 void loop() {
   // Execute the scheduler runner
   runner.execute();
+  // Update the MQTT queue and stay connected to Adafruit IO
+  io.run();
   // Update the clock
   //events();
 }
@@ -108,10 +114,10 @@ void sensor_readings_update()
 {
   refresh_readings_bme280( &bme, 
                     &tft, 
-                    &temperature, 
-                    &humidity, 
-                    &barpressure, 
-                    &altitude);
+                    temperature, 
+                    humidity, 
+                    barpressure, 
+                    altitude);
 }
 
 void clock_update()

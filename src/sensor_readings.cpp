@@ -78,7 +78,3 @@ void refresh_readings_bme280(  Adafruit_BME280* bme,
   //digitalWrite(LED_BUILTIN, LOW);
   Serial.println("-----v3----");   
 }
-
-void refresh_readings_mpu6050(TFT_eSPI* tft){
-
-}

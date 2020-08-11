@@ -5,6 +5,9 @@
     #include "ezTime.h"             // The time and date library
     //#include "aux_functions.h"      // Helpful functions
     #include "clock.h"
+    #include "EEPROM.h"
+    #include "esp_system.h"  // To implement the watchdog
+    //#include "mqtt_controller.h"
     // uint16_t bg = TFT_BLACK;
     // uint16_t fg = TFT_WHITE;
     #define LED_PIN            17
