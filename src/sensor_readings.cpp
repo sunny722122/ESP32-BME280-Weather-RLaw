@@ -68,6 +68,12 @@ void refresh_readings_bme280(  Adafruit_BME280* bme,
   tft->setCursor(5, 170);
   tft->print(f_altitude); 
   tft->println(" m");
+
+  //Send data to Adafruit.IO
+  temp    ->save(f_temperature );
+  hum     ->save(f_humidity );
+  bar     ->save(f_pressure );
+  alt     ->save(f_altitude );
   
   //digitalWrite(LED_BUILTIN, LOW);
   Serial.println("-----v3----");   

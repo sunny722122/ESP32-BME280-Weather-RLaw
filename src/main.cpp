@@ -30,6 +30,13 @@ Task t2_clock(1000, TASK_FOREVER, &clock_update);
 // Create the scheduler
 Scheduler runner;
 
+// Adafruit.IO feeds
+// Avoid underscores in the feed names, they cause problems with groupings.
+AdafruitIO_Feed *temperature    = io.feed("lab-environment.temperature");
+AdafruitIO_Feed *humidity       = io.feed("lab-environment.humidity");
+AdafruitIO_Feed *barpressure    = io.feed("lab-environment.barpressure");
+AdafruitIO_Feed *altitude       = io.feed("lab-environment.altitude");
+
 void initSPIFFS()
 {
     if (!SPIFFS.begin())
@@ -99,7 +106,12 @@ void loop() {
 
 void sensor_readings_update()
 {
-  refresh_readings_bme280(&bme, &tft);
+  refresh_readings_bme280( &bme, 
+                    &tft, 
+                    &temperature, 
+                    &humidity, 
+                    &barpressure, 
+                    &altitude);
 }
 
 void clock_update()
