@@ -8,6 +8,7 @@
 #include "WiFi.h"
 //#include <ESPAsyncWebServer.h>
 #include "network_config.h"
+#include "AdafruitIO_Feed.h"
 
 void sensor_readings_update();
 void clock_update();
